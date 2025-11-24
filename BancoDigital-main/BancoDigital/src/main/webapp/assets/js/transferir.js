@@ -1,20 +1,15 @@
 function validadorBusca() {
-    let texto = document.getElementById("texto").value;
+    let texto = document.getElementById('texto').value.trim();
 
-    if (texto !== '') {
-        let regexCPF = /^[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}$/;
-        let regexEmail = /^[\w\.-]+@[\w\.-]+\.\w+$/;
-
-        if (regexCPF.test(texto)) {
-            return true;
-        }
-        else if (regexEmail.test(texto)) {
-            return true;
-        }
-        else {
-            return true;
-        }
+    if (texto.length < 3) {
+        alert("Digite pelo menos 3 caracteres para buscar.");
+        return false;
     }
-
-    return false;
+    return true;
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".card").forEach((el, i) => {
+        el.style.animationDelay = `${i * 0.1}s`;
+    });
+});

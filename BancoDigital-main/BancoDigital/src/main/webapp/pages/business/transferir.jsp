@@ -3,67 +3,71 @@
 
 <%
     Pessoa usuarioLogado = (Pessoa) session.getAttribute("usuarioLogado");
-    
-	List<Pessoa> resultados = (List<Pessoa>) request.getAttribute("resultados");
-    
-	Pessoa destino = (Pessoa) request.getAttribute("destino");
+    List<Pessoa> resultados = (List<Pessoa>) request.getAttribute("resultados");
+    Pessoa destino = (Pessoa) request.getAttribute("destino");
+
     String erro = (String) request.getAttribute("erro");
-    
-    
     String sucesso = (String) request.getAttribute("sucesso");
 %>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Transferir</title>
+    <meta charset="UTF-8">
+    <title>Transferir</title>
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/transferir.css">
+    <script defer src="${pageContext.request.contextPath}/assets/js/transferir.js"></script>
+    <link rel="icon" href="${pageContext.request.contextPath}/images/iconsite.png">
 </head>
+
 <body>
 
-<h1>Transferência</h1>
+<div class="container">
 
-<% if (erro != null) { %>
-    <p style="color:red;"><%= erro %></p>
-<% } %>
+    <h1>Transferência</h1>
 
-<% if (sucesso != null) { %>
-    <p style="color:green;"><%= sucesso %></p>
-<% } %>
+    <% if (erro != null) { %>
+        <p class="msg-erro"><%= erro %></p>
+    <% } %>
 
-<!-- FORM DE BUSCA -->
-<% if (destino == null) {%>
-	<form action="${pageContext.request.contextPath}/pessoa/transferir" method="post">
-	    <label>Pesquisar conta destino:</label><br>
-	    <input id="texto" type="text" name="texto" required>
-	    <button type="submit" onclick="return validadorBusca()" >Buscar</button>
-	</form>
+    <% if (sucesso != null) { %>
+        <p class="msg-sucesso"><%= sucesso %></p>
+    <% } %>
 
-<% } %>
-<br><br>
+    <% if (destino == null) { %>
 
+        <form class="card" action="${pageContext.request.contextPath}/pessoa/transferir" method="post">
+            <label>Pesquisar conta destino</label>
+            <input id="texto" type="text" name="texto" placeholder="Digite nome ou CPF" required>
 
-<!-- SE JÁ TEM DESTINO ESCOLHIDO -->
-<% if (destino != null) { %>
+            <button type="submit" class="btn" onclick="return validadorBusca()">Buscar</button>
+        </form>
 
-    <h3>Transferência para: <%= destino.getNome() %></h3>
-    <p>CPF: <%= destino.getCpf() %></p>
-	<p>Saldo Atual: <%= usuarioLogado.getSaldo() %></p>
-	
-    <form action="${pageContext.request.contextPath}/pessoa/transferir" method="post">
-        <label>Valor:</label>
-        <input type="number" name="valor" required>
-			
-        <input type="hidden" name="destinoCpf" value="<%= destino.getCpf() %>">
+    <% } %>
 
-        <button type="submit">continuar</button>
-    </form>
+    <% if (destino != null) { %>
 
-<% } %>
+        <div class="card destino-card">
+            <h3>Transferência para: <%= destino.getNome() %></h3>
+            <p>CPF: <%= destino.getCpf() %></p>
+            <p>Seu saldo atual: R$ <%= String.format("%.2f", usuarioLogado.getSaldo()) %></p>
+        </div>
 
-	<p>voltar <a href="<%= request.getContextPath() + "/home" %>">pagina principal</a>...</p>
+        <form class="card" action="${pageContext.request.contextPath}/pessoa/transferir" method="post">
+            <label>Valor da transferencia</label>
+            <input type="number" name="valor" step="0.01" min="0.01" required>
 
-<script src="${pageContext.request.contextPath}/assets/js/transferir.js"></script>
+            <input type="hidden" name="destinoCpf" value="<%= destino.getCpf() %>">
+
+            <button type="submit" class="btn btn-confirmar">Continuar</button>
+        </form>
+
+    <% } %>
+
+    <a class="voltar" href="<%= request.getContextPath() + "/home" %>">Voltar para a página principal</a>
+
+</div>
 
 </body>
 </html>
