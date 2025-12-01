@@ -30,28 +30,5 @@ Pessoa usuarioLogado = (Pessoa) session.getAttribute("usuarioLogado");
 	<br>
 	<br>
 
-
-	<h2>Extrato da Última Transferência</h2>
-
-	<!-- Preview do último extrato -->
-	<form action="${pageContext.request.contextPath}/pessoa/extrato"
-		method="get" target="_blank">
-		<input type="hidden" name="cpf" value="<%=usuarioLogado.getCpf()%>">
-		<button type="submit">Visualizar Último Extrato</button>
-	</form>
-
-	<br>
-
-	<!-- Baixar PDF -->
-	<form action="${pageContext.request.contextPath}/pessoa/extrato"
-		method="get">
-		<input type="hidden" name="cpf" value="<%=usuarioLogado.getCpf()%>">
-		<input type="hidden" name="download" value="true">
-		<button type="submit">Baixar PDF</button>
-	</form>
-
-
-
-
 </body>
 </html>

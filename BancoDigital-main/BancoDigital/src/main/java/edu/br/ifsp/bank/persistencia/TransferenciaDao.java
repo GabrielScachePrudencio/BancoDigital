@@ -74,7 +74,7 @@ public class TransferenciaDao {
     
     
 
-    public void depositar(String cpf, float valor) throws SQLException {
+  /*  public void depositar(String cpf, float valor) throws SQLException {
     	PessoaDao pdao = new PessoaDao();
     	Transferencia t = new Transferencia();
         String sql = "UPDATE pessoa SET saldo = saldo + ? WHERE cpf = ?";
@@ -89,10 +89,10 @@ public class TransferenciaDao {
             t.setId_usuarioQueTransferiu(pdao.findByCPF(cpf).getId());
             add(t);
         }
-    }
+    }*/
 
     
-    public void retirar(String cpf, float valor) throws SQLException {
+  /*  public void retirar(String cpf, float valor) throws SQLException {
     	PessoaDao pdao = new PessoaDao();
     	Transferencia t = new Transferencia();
 
@@ -108,13 +108,32 @@ public class TransferenciaDao {
             t.setId_usuarioQueTransferiu(pdao.findByCPF(cpf).getId());
             add(t);
         }
+    }*/
+    
+    public Transferencia retirar(String cpf, float valor) throws SQLException {
+        PessoaDao pdao = new PessoaDao();
+        Transferencia t = new Transferencia();
+
+        String sql = "UPDATE pessoa SET saldo = saldo - ? WHERE cpf = ?";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setFloat(1, valor);
+            ps.setString(2, cpf);
+            ps.executeUpdate();
+
+            t.setHorario(LocalDateTime.now());
+            t.setValor(valor);
+
+            // retirada: quem transfere == quem recebe
+            int id = pdao.findByCPF(cpf).getId();
+            t.setId_usuarioQueTransferiu(id);
+            t.setId_usuarioQueRecebeu(id);
+
+            return add(t);
+        }
     }
-    
-    
-    
-
-	
-
 	
 	public Transferencia transferirViaCpf(String cpfQueVaiSerTransferido, String cpfDoUsuarioLogado, float valor) throws SQLException{
 		PessoaDao pdao = new PessoaDao();
@@ -167,9 +186,52 @@ public class TransferenciaDao {
 	    } catch (SQLException e) {
 	        throw new DataAccessException(e);
 	    }
-
 	    return transferencias;
 	}
 	
-	
+/*	public Transferencia depositar(String cpf, float valor) throws SQLException {
+	    PessoaDao pdao = new PessoaDao();
+	    Transferencia t = new Transferencia();
+
+	    String sql = "UPDATE pessoa SET saldo = saldo + ? WHERE cpf = ?";
+
+	    try (Connection conn = ConnectionFactory.getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+	        ps.setFloat(1, valor);
+	        ps.setString(2, cpf);
+	        ps.executeUpdate();
+
+	        t.setHorario(LocalDateTime.now());
+	        t.setValor(valor);
+
+	        // depósito: quem transfere == quem recebe
+	        int id = pdao.findByCPF(cpf).getId();
+	        t.setId_usuarioQueRecebeu(id);
+	        t.setId_usuarioQueTransferiu(id);
+
+	        return add(t);   // <-- RETORNA A TRANSFERÊNCIA GRAVADA
+	    }
+	}*/
+	public Transferencia depositar(String cpf, float valor) throws SQLException {
+	    PessoaDao pdao = new PessoaDao();
+	    Transferencia t = new Transferencia();
+
+	    String sql = "UPDATE pessoa SET saldo = saldo + ? WHERE cpf = ?";
+
+	    try (Connection conn = ConnectionFactory.getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+	        ps.setFloat(1, valor);
+	        ps.setString(2, cpf);
+	        ps.executeUpdate();
+
+	        t.setHorario(LocalDateTime.now());
+	        t.setValor(valor);
+	        t.setId_usuarioQueRecebeu(pdao.findByCPF(cpf).getId());
+	        t.setId_usuarioQueTransferiu(t.getId_usuarioQueRecebeu()); // depósito é a mesma pessoa
+
+	        return add(t);  // <- IMPORTANTE!
+	    }
+	}
 }

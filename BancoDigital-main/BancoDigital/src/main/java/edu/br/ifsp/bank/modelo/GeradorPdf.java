@@ -24,4 +24,19 @@ public class GeradorPdf {
         pdf.add(new Paragraph("Data: " + t.getHorario()));
         pdf.add(new Paragraph("\n"));
     }
+    
+    
+    public void gerarPdfRetirada(Document pdf, Transferencia retirada, Pessoa usuario) throws Exception {
+
+        pdf.add(new Paragraph("COMPROVANTE DE RETIRADA"));
+        pdf.add(new Paragraph(" "));
+        pdf.add(new Paragraph("Nome: " + usuario.getNome()));
+        pdf.add(new Paragraph("CPF: " + usuario.getCpf()));
+        pdf.add(new Paragraph("Valor retirado: R$ " + String.format("%.2f", retirada.getValor())));
+        pdf.add(new Paragraph("Data/Hora: " + retirada.getHorario()));
+        pdf.add(new Paragraph(" "));
+        pdf.add(new Paragraph("Operação realizada com sucesso."));
+    }
+
+
 }
