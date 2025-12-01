@@ -60,8 +60,8 @@ public class PessoaController extends HttpServlet{
 	            req.getRequestDispatcher("/pages/business/transferir.jsp")
 	               .forward(req, res);
 	        };
-	        
-	        case "/extrato" -> new ExtratoPessoaCommand();
+	        case "/historico" -> new HistoricoPessoaCommand();
+	        case "/extrato" -> new ExtratoPessoaCommand(); // dentro de pessoa
 	        
 	        case "/emprestimoSac" -> (req, res) -> {
 	            req.getRequestDispatcher("/pages/business/emprestimoSac.jsp")

@@ -71,11 +71,14 @@
 				</a> <a href="pessoa/investir" class="menu-card">
 					<div class="menu-icon">📈</div>
 					<h4>Investir</h4>
-					<p>Faça seu dinheiro crescer</p>
-				</a> <a href="pessoa/historico" class="menu-card">
-					<div class="menu-icon">📋</div>
-					<h4>Histórico</h4>
-					<p>Veja suas transações</p>
+					<p>Faça seu dinheiro crescer</p> 
+				<a
+					href="${pageContext.request.contextPath}/pessoa/historico" class="menu-card">
+						<div class="menu-icon">📋</div>
+						<h4>Histórico</h4>
+						<p>Veja suas transações</p>
+				</a>
+
 				</a> <a href="pessoa/configuracoes" class="menu-card">
 					<div class="menu-icon">⚙️</div>
 					<h4>Configurações</h4>

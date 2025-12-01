@@ -1,5 +1,7 @@
 package edu.br.ifsp.bank.web.pessoa;
 
+
+
 import java.io.IOException;
 import java.util.List;
 
@@ -15,7 +17,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class ExtratoPessoaCommand implements Command {
 
-    @Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
         String cpf = req.getParameter("cpf");
@@ -28,7 +29,7 @@ public class ExtratoPessoaCommand implements Command {
             return;
         }
 
-        // PEGA A ÚLTIMA TRANSFERÊNCIA DA LISTA (A TRANSFERÊNCIA ATUAL)
+        // pega a ultima transferência da lista
         Transferencia ultima = transacoes.get(transacoes.size() - 1);
 
         // Se download=true -> baixa
@@ -72,3 +73,4 @@ public class ExtratoPessoaCommand implements Command {
         }
     }
 }
+

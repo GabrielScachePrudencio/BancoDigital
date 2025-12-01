@@ -6,30 +6,44 @@
 <head>
 <meta charset="UTF-8">
 <title>Retirar</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/transferir.css">
+<link rel="icon" href="${pageContext.request.contextPath}/images/iconsite.png">
 </head>
 
 <%
     Pessoa usuarioLogado = (Pessoa) session.getAttribute("usuarioLogado");
+    String erro = (String) request.getAttribute("erro");
+    String sucesso = (String) request.getAttribute("sucesso");
 %>
 
 <body>
-	<h1> Retirar </h1>
-	
-	<form action="${pageContext.request.contextPath}/pessoa/retirar" method="post">
-    <label>Digite o valor que vai ser retirado</label><br>
 
-    <label>Saldo atual: <%= usuarioLogado.getSaldo() %></label><br><br>
+<div class="container">
 
-    <input type="number" name="valor" required><br><br>
+    <h1>Retirada</h1>
 
-    <input type="number" value="<%= usuarioLogado.getCpf() %>" disabled>
+    <% if (erro != null) { %>
+        <p class="msg-erro"><%= erro %></p>
+    <% } %>
 
-    <input type="hidden" name="cpf" value="<%= usuarioLogado.getCpf() %>">
+    <% if (sucesso != null) { %>
+        <p class="msg-sucesso"><%= sucesso %></p>
+    <% } %>
 
-    <br><br>
+    <form class="card" action="${pageContext.request.contextPath}/pessoa/retirar" method="post">
+        <label>Digite o valor que deseja retirar</label>
+        <input type="number" name="valor" step="0.01" min="0.01" required>
 
-    <button type="submit">Retirar</button>
-</form>
+        <p>Saldo atual: R$ <%= String.format("%.2f", usuarioLogado.getSaldo()) %></p>
+
+        <input type="hidden" name="cpf" value="<%= usuarioLogado.getCpf() %>">
+
+        <button type="submit" class="btn btn-confirmar">Confirmar</button>
+    </form>
+
+    <a class="voltar" href="<%= request.getContextPath() + "/home" %>">Voltar</a>
+
+</div>
 
 </body>
 </html>
