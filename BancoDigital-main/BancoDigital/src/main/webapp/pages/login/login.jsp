@@ -51,11 +51,7 @@
 
 				<button type="submit">Entrar</button>
 
-				<div class="signup-link">
-					Não tem uma conta? <a
-						href="<%=request.getContextPath()%>/pessoa/cadastrar">Crie
-						uma conta</a>
-				</div>
+				
 			</form>
 		</div>
 	</div>

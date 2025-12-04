@@ -11,6 +11,19 @@ function fecharModalEditar() {
 	document.body.style.overflow = 'auto';
 }
 
+
+function modalAlterarSenha() {
+	const modal = document.getElementById('modalAlterarSenha');
+	modal.style.display = 'block';
+	document.body.style.overflow = 'hidden';
+}
+
+function fecharModalAlterarSenha() {
+	const modal = document.getElementById('modalAlterarSenha');
+	modal.style.display = 'none';
+	document.body.style.overflow = 'auto';
+}
+
 function modalDeletar() {
 	const modal = document.getElementById('modalDeletar');
 	modal.style.display = 'block';

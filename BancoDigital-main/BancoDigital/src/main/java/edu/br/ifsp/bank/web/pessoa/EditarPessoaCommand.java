@@ -9,6 +9,7 @@ import edu.br.ifsp.bank.web.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class EditarPessoaCommand implements Command{
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,7 +45,8 @@ public class EditarPessoaCommand implements Command{
         
         try {
             dao.editar(pessoaEditada); 
-            
+            HttpSession session = request.getSession();
+		    session.setAttribute("usuarioLogado", pessoaEditada);
             request.setAttribute("success", "Conta editada com sucesso! Faça login para continuar.");
             request.getRequestDispatcher("/pages/business/configuracoes/configuracoes.jsp").forward(request, response);
 

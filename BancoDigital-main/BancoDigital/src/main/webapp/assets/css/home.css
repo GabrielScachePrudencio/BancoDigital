@@ -658,4 +658,43 @@ body {
 	.section-title {
 		font-size: 20px;
 	}
+	
+	.action-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    padding: 18px;
+    border-radius: 12px;
+    background: #f5f5f5;
+    transition: 0.2s;
+}
+
+.action-card:hover {
+    background: #ededed;
+}
+
+.action-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.disabled-action {
+    pointer-events: none;
+    opacity: 0.40;
+    filter: grayscale(1);
+}
+
+.container-home {
+    padding: 20px;
+}
+
+.home-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+	
+	
+	
 }

@@ -12,10 +12,13 @@ CREATE TABLE pessoa (
     telefone VARCHAR(20),
     endereco VARCHAR(255),
     saldo DECIMAL(10, 2) DEFAULT 0.00,
-
-    -- NOVO: tipo de usuário
-    role ENUM('ADMIN', 'USER') NOT NULL DEFAULT 'USER'
+    role ENUM('ADMIN', 'USER', 'GERENTE') NOT NULL DEFAULT 'USER',
+    habilitadoPeloGerente BOOLEAN NOT NULL DEFAULT FALSE
 );
+
+
+
+DROP TABLE pessoa;
 
 CREATE TABLE investimento (
     id            INT AUTO_INCREMENT PRIMARY KEY,
@@ -53,7 +56,11 @@ VALUES
 
 INSERT INTO pessoa (cpf, nome, senha, email, telefone, endereco, saldo, role) 
 VALUES 
-('323.456.789-00', '1', '1', 's@example.com', '1234567890', 'Rua A, 123', 1000.50, 'ADMIN');
+('432.456.789-00', 'gerente', 'gerente', 'bielscache@gmail.com', '1234567890', 'Rua A, 123', 0, 'GERENTE');
+
+INSERT INTO pessoa (cpf, nome, senha, email, telefone, endereco, saldo, role) 
+VALUES 
+('323.456.789-00', '1', '1', 'bielscache@gmail.com', '1234567890', 'Rua A, 123', 1000.50, 'ADMIN');
 
 
 INSERT INTO pessoa (cpf, nome, senha, email, telefone, endereco, saldo, role) 
@@ -70,4 +77,4 @@ VALUES
 
 -- Consultas
 SELECT * FROM pessoa;
-SELECT * FROM transferencia;
+SELECT * FROM transferencia;	

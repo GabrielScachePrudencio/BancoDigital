@@ -70,6 +70,17 @@ public class PessoaController extends HttpServlet{
 	        
 	        case "/investir" -> new ListarInvestimentosCommand();
 	      
+	        
+	        //permite acessar de fato a pagina apartir do email
+	        case "/trocarsenha" -> new TrocarSenhaCommand();
+	        
+	        
+	        //so enviar o email de troca de senha
+	        case "/enviarEmail" -> new EnviarEmailCommand();
+	        
+	        case "/habilitarContas" -> new HabilitarContasCommand();
+	        case "/desabilitarContas" -> new DesabilitarContasCommand();
+
 	        default -> PageNotFound.getInstance();
 	    };
 
@@ -85,7 +96,6 @@ public class PessoaController extends HttpServlet{
 	    	case "/cadastrar" -> new AddPessoaCommand();
 	        case "/editar" -> new EditarPessoaCommand();
 	        case "/deletar" -> new DeletarPessoaCommand();
-	        case "/pesquisar" -> new PesquisarIdPessoaCommand();
 	        
 	        case "/todosUsuarios" -> new TodosUsuariosCommand();
 	        case "/todosTransferencias" -> new TodosTransferenciasCommand();
@@ -98,6 +108,16 @@ public class PessoaController extends HttpServlet{
 	        case "/investir" -> new InvestirPessoaCommand();
 	        
 	        
+	      //permite acessar de fato a pagina apartir do email
+	        case "/trocarsenha" -> new TrocarSenhaCommand();
+	        
+	        
+	        //so enviar o email
+	        case "/enviarEmail" -> new EnviarEmailCommand();
+	        
+	        case "/habilitarContas" -> new HabilitarContasCommand();
+	        case "/desabilitarContas" -> new DesabilitarContasCommand();
+
 	        default -> PageNotFound.getInstance();
 	    };
 

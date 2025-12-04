@@ -17,9 +17,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-
+	
 	<%
-	Pessoa usuarioLogado = (Pessoa) session.getAttribute("usuarioLogado");
+	Pessoa usuarioLogado = (Pessoa) session	.getAttribute("usuarioLogado");
 	TipoUsuario role = (TipoUsuario) session.getAttribute("role");
 	%>
 
@@ -27,7 +27,6 @@
 	if (usuarioLogado != null) {
 	%>
 
-	<!-- Sidebar Navigation -->
 	<aside class="sidebar">
 		<div class="sidebar-header">
 			<div class="logo">
@@ -61,9 +60,7 @@
 		</div>
 	</aside>
 
-	<!-- Main Content -->
 	<main class="main-container">
-		<!-- Top Bar -->
 		<header class="topbar">
 			<div class="topbar-left">
 				<button class="menu-toggle" id="menuToggle">
@@ -89,10 +86,8 @@
 			</div>
 		</header>
 
-		<!-- Dashboard Section -->
 		<div class="content-section active" id="dashboard">
 			<div class="container-fluid px-4">
-				<!-- Balance Card -->
 				<div class="row mb-4">
 					<div class="col-12">
 						<div class="balance-card-main">
@@ -113,10 +108,15 @@
 					</div>
 				</div>
 
-				<!-- Quick Actions -->
 				<section class="mb-5">
 					<h3 class="section-title mb-4">Ações Rápidas</h3>
 					<div class="row g-3">
+						
+						<% 
+							// Verifica se o usuário está habilitado para as ações principais
+							if (usuarioLogado.isHabilitadoPeloCliente()) { 
+						%>
+						
 						<div class="col-6 col-md-4 col-lg-2">
 							<a href="pessoa/transferir" class="action-card">
 								<div class="action-icon transfer">
@@ -125,6 +125,7 @@
 								<span class="action-label">Transferir</span>
 							</a>
 						</div>
+						
 						<div class="col-6 col-md-4 col-lg-2">
 							<a href="pessoa/depositar" class="action-card">
 								<div class="action-icon deposit">
@@ -133,6 +134,7 @@
 								<span class="action-label">Depositar</span>
 							</a>
 						</div>
+						
 						<div class="col-6 col-md-4 col-lg-2">
 							<a href="pessoa/retirar" class="action-card">
 								<div class="action-icon withdraw">
@@ -141,6 +143,7 @@
 								<span class="action-label">Sacar</span>
 							</a>
 						</div>
+						
 						<div class="col-6 col-md-4 col-lg-2">
 							<a href="pessoa/emprestimoSac" class="action-card">
 								<div class="action-icon loan">
@@ -149,6 +152,7 @@
 								<span class="action-label">Empréstimo</span>
 							</a>
 						</div>
+						
 						<div class="col-6 col-md-4 col-lg-2">
 							<a href="pessoa/investir" class="action-card">
 								<div class="action-icon invest">
@@ -157,6 +161,7 @@
 								<span class="action-label">Investir</span>
 							</a>
 						</div>
+						
 						<div class="col-6 col-md-4 col-lg-2">
 							<a href="pessoa/historico" class="action-card">
 								<div class="action-icon history">
@@ -165,10 +170,47 @@
 								<span class="action-label">Histórico</span>
 							</a>
 						</div>
+						
+						<% 
+							} else { // Se não estiver habilitado, mostra a mensagem de aviso
+						%>
+						
+						<div class="col-12">
+							<div class="alert alert-warning" role="alert">
+								<i class="bi bi-exclamation-triangle-fill me-2"></i>
+								Sua conta ainda não está habilitada para transações. Por favor, aguarde a aprovação.
+							</div>
+						</div>
+						
+						<% 
+							} 
+						%>
+
+						<% if(role != null && role.equals(TipoUsuario.GERENTE)){ %>
+							<div class="col-6 col-md-4 col-lg-2">
+								<a href="pessoa/habilitarContas" class="action-card">
+									<div class="action-icon settings">
+										<i class="bi bi-person-check"></i>
+									</div>
+									<span class="action-label">HABILITAR CONTAS</span>
+								</a>
+								
+								
+							</div>
+							
+							<div class="col-6 col-md-4 col-lg-2">
+								<a href="pessoa/desabilitarContas" class="action-card">
+									<div class="action-icon settings">
+										<i class="bi bi-person-check"></i>
+									</div>
+									<span class="action-label">DESABILITAR CONTAS</span>
+								</a>
+						<% } %>
+
 					</div>
 				</section>
 
-				<!-- Info Cards -->
+
 				<div class="row g-4 mb-5">
 					<div class="col-md-6">
 						<div class="info-card">
@@ -198,7 +240,6 @@
 					</div>
 				</div>
 
-				<!-- News Section -->
 				<section class="news-section">
 					<h3 class="section-title mb-4">
 						<i class="bi bi-newspaper me-2"></i>
@@ -242,4 +283,4 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/home.js"></script>
 </body>
-</html>
+</html>	

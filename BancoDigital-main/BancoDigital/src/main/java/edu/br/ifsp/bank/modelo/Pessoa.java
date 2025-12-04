@@ -10,7 +10,7 @@ public class Pessoa {
 	private String endereco;
 	private TipoUsuario role;
 	private float saldo;
-	
+	private boolean habilitadoPeloCliente;
 	
 	public Pessoa() {
 		
@@ -81,6 +81,18 @@ public class Pessoa {
 	public void setSaldo(float saldo) {
 		this.saldo = saldo;
 	}
+
+
+	public boolean isHabilitadoPeloCliente() {
+		return habilitadoPeloCliente;
+	}
+
+
+	public void setHabilitadoPeloCliente(boolean habilitadoPeloCliente) {
+		this.habilitadoPeloCliente = habilitadoPeloCliente;
+	}
+	
+	
 	
 
 }

@@ -57,6 +57,12 @@
 					<h4>Editar Dados</h4>
 					<p>Atualize suas informações pessoais</p>
 				</button>
+				<button class="config-card" onclick="modalAlterarSenha()">
+					<div class="config-icon">✏️</div>
+					<h4>Trocar sua senha por email</h4>
+					<p>Atualize suas informações pessoais</p>
+				</button>
+				
 
 				<button class="config-card delete-card" onclick="modalDeletar()">
 					<div class="config-icon">🗑️</div>
@@ -111,7 +117,36 @@
 			</form>
 		</div>
 	</div>
+	
+	<!-- Modal Alterar Senha -->
+	<div id="modalAlterarSenha" class="modal">
+	    <div class="modal-overlay" onclick="fecharModalAlterarSenha()"></div>
+	
+	    <div class="modal-content modal-confirm">
+	        <span class="fechar" onclick="fecharModalAlterarSenha()">✕</span>
+	
+	        <h2>Alterar Senha</h2>
+	
+	        <p>Tem certeza que deseja alterar sua senha?</p>
+	
+	        <div class="modal-buttons">
+	            <button class="btn-cancelar" onclick="fecharModalAlterarSenha()">Cancelar</button>
+	
+	            <form action="${pageContext.request.contextPath}/pessoa/enviarEmail" method="post">
+	                <!-- caso precise usar id/codigo, coloca aqui como hidden -->
+	                <input type="hidden" name="id" value="${usuarioLogado.id}">
+	
+	
+	                <button type="submit" class="btn-confirmar">
+	                    Confirmar
+	                </button>
+	            </form>
+	        </div>
+	    </div>
+	</div>
+	
 
+	
 	<!-- Modal Editar -->
 	<div id="modalEditar" class="modal">
 		<div class="modal-overlay" onclick="fecharModalEditar()"></div>
@@ -163,7 +198,7 @@
 				<div class="form-group">
 					<label for="senha">🔒 Senha:</label> <input type="password"
 						id="senha" name="senha" value="<%=usuarioLogado.getSenha()%>"
-						required>
+						readonly>
 				</div>
 
 				<input type="hidden" id="saldo" name="saldo"
