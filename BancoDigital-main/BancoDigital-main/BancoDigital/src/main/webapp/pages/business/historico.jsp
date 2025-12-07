@@ -87,7 +87,7 @@
 					</div>
 					<h3>Nenhuma transação encontrada</h3>
 					<p>Você ainda não possui transações no seu histórico.</p>
-					<a href="<%=request.getContextPath()%>pessoa/transferir" class="btn btn-primary mt-3">
+					<a href="<%=request.getContextPath()%>/pessoa/transferir" class="btn btn-primary mt-3">
 						<i class="bi bi-plus-circle me-2"></i>Nova transação
 					</a>
 				</div>
