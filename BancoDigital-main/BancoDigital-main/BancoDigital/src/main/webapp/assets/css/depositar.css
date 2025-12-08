@@ -1,0 +1,339 @@
+/* ===== VARIABLES ===== */
+:root {
+	--primary: #8A05BE;
+	--primary-dark: #6200EA;
+	--secondary: #00D9B2;
+	--accent: #7C4DFF;
+	--success: #00C853;
+	--danger: #EA1D2C;
+	--warning: #FFA000;
+	--text: #1A1A1D;
+	--text-light: #6E6E73;
+	--border: #E8E8E8;
+	--bg: #F5F5F5;
+	--white: #FFFFFF;
+	--shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+	--shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+	--shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+	--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+	background: var(--bg);
+	color: var(--text);
+	line-height: 1.6;
+}
+
+/* ===== WRAPPER ===== */
+.depositar-wrapper {
+	min-height: 100vh;
+	padding: 40px 20px;
+}
+
+.depositar-container {
+	max-width: 700px;
+	margin: 0 auto;
+}
+
+/* ===== HEADER ===== */
+.depositar-header {
+	background: var(--white);
+	border-radius: 24px;
+	padding: 32px;
+	margin-bottom: 32px;
+	box-shadow: var(--shadow-sm);
+}
+
+.back-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	color: var(--text-light);
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: 500;
+	margin-bottom: 24px;
+	transition: var(--transition);
+}
+
+.back-link:hover {
+	color: var(--primary);
+	gap: 12px;
+}
+
+.header-content {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.header-icon {
+	width: 70px;
+	height: 70px;
+	background: linear-gradient(135deg, var(--secondary) 0%, #00B894 100%);
+	border-radius: 18px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 32px;
+	color: var(--white);
+	box-shadow: 0 4px 16px rgba(0, 217, 178, 0.25);
+	flex-shrink: 0;
+}
+
+.depositar-title {
+	font-size: 32px;
+	font-weight: 700;
+	color: var(--text);
+	margin-bottom: 8px;
+	letter-spacing: -0.5px;
+}
+
+.depositar-subtitle {
+	font-size: 16px;
+	color: var(--text-light);
+	margin: 0;
+}
+
+/* ===== CARDS ===== */
+.card {
+	border: none;
+	border-radius: 20px;
+	box-shadow: var(--shadow-sm);
+	margin-bottom: 24px;
+	transition: var(--transition);
+}
+
+.card:hover {
+	box-shadow: var(--shadow-md);
+}
+
+.card-body {
+	padding: 32px;
+}
+
+/* ===== SALDO CARD ===== */
+.saldo-card {
+	background: linear-gradient(135deg, var(--secondary) 0%, #00B894 100%);
+	color: var(--white);
+}
+
+.saldo-info {
+	text-align: center;
+}
+
+.saldo-label {
+	font-size: 14px;
+	font-weight: 500;
+	opacity: 0.9;
+	margin-bottom: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.saldo-value {
+	font-size: 40px;
+	font-weight: 700;
+	letter-spacing: -1px;
+}
+
+/* ===== DEPOSIT CARD ===== */
+.depositar-card {
+	background: var(--white);
+}
+
+/* ===== FORM ELEMENTS ===== */
+.form-label {
+	font-weight: 600;
+	color: var(--text);
+	margin-bottom: 12px;
+	font-size: 15px;
+	display: flex;
+	align-items: center;
+}
+
+.form-control {
+	border: 2px solid var(--border);
+	border-radius: 12px;
+	padding: 14px 18px;
+	font-size: 15px;
+	transition: var(--transition);
+	background: var(--white);
+}
+
+.form-control:focus {
+	border-color: var(--secondary);
+	box-shadow: 0 0 0 4px rgba(0, 217, 178, 0.1);
+	background: var(--white);
+}
+
+.form-control:disabled {
+	background: var(--bg);
+	cursor: not-allowed;
+}
+
+.form-control::placeholder {
+	color: var(--text-light);
+	opacity: 0.6;
+}
+
+.input-group-text {
+	background: var(--bg);
+	border: 2px solid var(--border);
+	border-right: none;
+	color: var(--text);
+	font-weight: 600;
+	font-size: 16px;
+	border-top-left-radius: 12px;
+	border-bottom-left-radius: 12px;
+}
+
+.input-group .form-control {
+	border-left: none;
+}
+
+.form-text {
+	margin-top: 8px;
+	font-size: 13px;
+	color: var(--text-light);
+	display: flex;
+	align-items: center;
+}
+
+/* ===== BUTTON ===== */
+.btn-primary {
+	background: linear-gradient(135deg, var(--secondary) 0%, #00B894 100%);
+	border: none;
+	border-radius: 12px;
+	padding: 16px 32px;
+	font-size: 16px;
+	font-weight: 600;
+	transition: var(--transition);
+	box-shadow: 0 4px 16px rgba(0, 217, 178, 0.25);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.btn-primary:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 24px rgba(0, 217, 178, 0.35);
+	background: linear-gradient(135deg, #00B894 0%, var(--secondary) 100%);
+}
+
+.btn-primary:active {
+	transform: translateY(0);
+}
+
+/* ===== INFO CARD ===== */
+.info-card {
+	background: rgba(0, 217, 178, 0.05);
+	border: 2px solid rgba(0, 217, 178, 0.1);
+}
+
+.info-item {
+	display: flex;
+	align-items: flex-start;
+	gap: 16px;
+	padding: 16px 0;
+	border-bottom: 1px solid var(--border);
+}
+
+.info-item:last-child {
+	border-bottom: none;
+	padding-bottom: 0;
+}
+
+.info-item:first-child {
+	padding-top: 0;
+}
+
+.info-item i {
+	font-size: 28px;
+	color: var(--secondary);
+	flex-shrink: 0;
+	margin-top: 4px;
+}
+
+.info-item strong {
+	display: block;
+	font-size: 15px;
+	color: var(--text);
+	margin-bottom: 4px;
+}
+
+.info-item p {
+	font-size: 14px;
+	color: var(--text-light);
+	margin: 0;
+}
+
+/* ===== BACK SECTION ===== */
+.back-section {
+	text-align: center;
+	margin-top: 32px;
+}
+
+.back-main-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	color: var(--text-light);
+	text-decoration: none;
+	font-size: 15px;
+	font-weight: 500;
+	padding: 12px 24px;
+	border-radius: 12px;
+	transition: var(--transition);
+	background: var(--white);
+	box-shadow: var(--shadow-sm);
+}
+
+.back-main-link:hover {
+	color: var(--secondary);
+	background: var(--white);
+	box-shadow: var(--shadow-md);
+	transform: translateY(-2px);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+	.depositar-wrapper {
+		padding: 20px 16px;
+	}
+	
+	.depositar-header {
+		padding: 24px;
+	}
+	
+	.header-content {
+		flex-direction: column;
+		text-align: center;
+	}
+	
+	.depositar-title {
+		font-size: 24px;
+	}
+	
+	.depositar-subtitle {
+		font-size: 14px;
+	}
+	
+	.card-body {
+		padding: 24px;
+	}
+	
+	.saldo-value {
+		font-size: 32px;
+	}
+}
