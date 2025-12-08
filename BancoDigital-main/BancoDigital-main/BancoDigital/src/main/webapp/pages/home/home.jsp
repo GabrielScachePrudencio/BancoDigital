@@ -189,8 +189,8 @@
 						<% if(role != null && role.equals(TipoUsuario.GERENTE)){ %>
 							<div class="col-6 col-md-4 col-lg-2">
 								<a href="pessoa/habilitarContas" class="action-card">
-									<div class="action-icon settings">
-										<i class="bi bi-person-check"></i>
+									<div class="action-icon history">
+										<i class="bi bi-clock-history"></i>
 									</div>
 									<span class="action-label">HABILITAR CONTAS</span>
 								</a>
@@ -200,8 +200,8 @@
 							
 							<div class="col-6 col-md-4 col-lg-2">
 								<a href="pessoa/desabilitarContas" class="action-card">
-									<div class="action-icon settings">
-										<i class="bi bi-person-check"></i>
+									<div class="action-icon history">
+										<i class="bi bi-clock-history"></i>
 									</div>
 									<span class="action-label">DESABILITAR CONTAS</span>
 								</a>

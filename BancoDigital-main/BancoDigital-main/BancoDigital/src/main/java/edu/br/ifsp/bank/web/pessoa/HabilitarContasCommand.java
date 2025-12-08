@@ -37,7 +37,7 @@ public class HabilitarContasCommand implements Command{
         }
         
         request.setAttribute("pessoasNaoHabilitadas", pessoasNaoHabilitadas);
-
+        request.setAttribute("termoBusca", termoBusca);
         request.getRequestDispatcher("/pages/business/habilitarContas.jsp").forward(request, response);
     }
 }

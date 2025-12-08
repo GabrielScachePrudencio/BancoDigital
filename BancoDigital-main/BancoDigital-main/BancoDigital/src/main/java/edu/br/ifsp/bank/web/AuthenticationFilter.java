@@ -26,7 +26,7 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 		System.out.println("[AuthFilter] path: " + httpRequest.getMethod() + " " + path);
 
 		if (!hasAuthenticatedUser(httpRequest)) {
-		    if (urlPermitidas(path)) { 
+		    if (!urlPermitidas(path)) { 
 			    final String destination = httpRequest.getContextPath() + "/login?next=" + path;
 			    httpResponse.sendRedirect(destination);
 			    return;
@@ -46,13 +46,15 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 	}
     
 	private boolean urlPermitidas(String path) {
-	    return !("/login".equals(path) 
-	        || "/verificacaoCodigo".equals(path) 
-	        || "/pessoa/cadastrar".equals(path)
-	        || "/pessoa/trocarsenha".equals(path)   
-	        || path.startsWith("/assets/"));
-	}
-
+        return ("/login".equals(path)
+                || "/verificacaoCodigo".equals(path)
+                || "/pessoa/cadastrar".equals(path)
+                || "/pessoa/trocarsenha".equals(path)
+                || path.startsWith("/assets/")
+                || path.startsWith("/images/")
+                || path.startsWith("/favicon/")
+        );
+    }
     
 	private boolean hasAuthenticatedUser(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);

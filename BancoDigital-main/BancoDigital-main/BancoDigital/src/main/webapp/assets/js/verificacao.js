@@ -1,51 +1,52 @@
-// ===== FORM HANDLING =====
-const verificationForm = document.querySelector('.verificacao-form');
-const codigoInput = document.getElementById('codigo');
+//
+// Arquivo: verificacao.js
+// Funcionalidades para a página de Verificação de Código.
+//
 
-if (verificationForm) {
-	verificationForm.addEventListener('submit', function(e) {
-		const codigo = codigoInput.value.trim();
-		
-		if (!codigo) {
-			e.preventDefault();
-			return;
-		}
-		
-		// Add loading state
-		const submitBtn = this.querySelector('button[type="submit"]');
-		submitBtn.disabled = true;
-		submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Validando...';
-	});
-}
-
-// ===== ANIMATE ELEMENTS ON LOAD =====
 document.addEventListener('DOMContentLoaded', function() {
-	// Animate container
+
+	// ===== 1. ANIMAÇÃO SUAVE NO CARREGAMENTO =====
 	const container = document.querySelector('.verificacao-container');
 	if (container) {
 		container.style.opacity = '0';
-		container.style.transform = 'translateY(30px)';
-		
+		container.style.transform = 'translateY(20px)';
 		setTimeout(() => {
-			container.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+			container.style.transition = 'all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1)'; /* Efeito Material Design */
 			container.style.opacity = '1';
 			container.style.transform = 'translateY(0)';
 		}, 100);
 	}
-	
-	// Auto-dismiss alerts after 5 seconds
+
+	// ===== 2. FOCO AUTOMÁTICO NO INPUT DO CÓDIGO =====
+	const codigoInput = document.getElementById('codigo');
+	if (codigoInput) {
+		// Pequeno delay para garantir que a animação CSS termine
+		setTimeout(() => {
+			codigoInput.focus();
+		}, 600);
+	}
+
+	// ===== 3. AUTO-DISMISS ALERTS (Para mensagens de erro) =====
 	const alerts = document.querySelectorAll('.alert');
 	alerts.forEach(alert => {
 		setTimeout(() => {
-			const bsAlert = new bootstrap.Alert(alert);
-			bsAlert.close();
-		}, 5000);
+			// Verifica se o Bootstrap está carregado antes de usar new bootstrap.Alert
+			if (typeof bootstrap !== 'undefined' && bootstrap.Alert) {
+				const bsAlert = new bootstrap.Alert(alert);
+				bsAlert.close();
+			}
+		}, 5000); // Fecha o alerta após 5 segundos
 	});
-	
-	// Focus input
-	if (codigoInput) {
-		setTimeout(() => {
-			codigoInput.focus();
-		}, 500);
+
+	// ===== 4. ESTADO DE CARREGAMENTO NO BOTÃO (LOADING) =====
+	const form = document.querySelector('.verificacao-form');
+	if (form) {
+		form.addEventListener('submit', function(e) {
+			const submitBtn = this.querySelector('button[type="submit"]');
+			if (submitBtn) {
+				submitBtn.disabled = true;
+				submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Validando...';
+			}
+		});
 	}
 });

@@ -115,40 +115,47 @@
 								</tr>
 							</thead>
 							<tbody>
-								<% for (Pessoa pessoa : pessoasHabilitadas) { 
-									if(pessoasHabilitadas != null) {
-										if (pessoa.getRole().equals(TipoUsuario.ADMIN) || pessoa.getRole().equals(TipoUsuario.GERENTE)) continue;
-									}
-								%>
-								<tr>
-									<td>
-										<span class="badge bg-primary">#<%=pessoa.getId()%></span>
-									</td>
-									<td><strong><%=pessoa.getCpf()%></strong></td>
-									<td>
-										<div class="user-info">
-											<div class="user-avatar">
-												<%=pessoa.getNome().substring(0, 1).toUpperCase()%>
-											</div>
-											<span><%=pessoa.getNome()%></span>
-										</div>
-									</td>
-									<td><%=pessoa.getEmail()%></td>
-									<td class="text-end">
-										<form action="<%=request.getContextPath()%>/pessoa/desabilitarContas" method="post" style="display:inline;">
-											<input type="hidden" name="idContaParaSerDesabilitada" value="<%=pessoa.getId()%>">
-											<button 
-												type="submit" 
-												class="btn btn-danger btn-sm" 
-												onclick="return confirm('Tem certeza que deseja desabilitar a conta de <%=pessoa.getNome()%>?');">
-												<i class="bi bi-slash-circle me-1"></i>
-												Desabilitar
-											</button>
-										</form>
-									</td>
-								</tr>
-								<% } %>
+							    <% 
+							        for (Pessoa pessoa : pessoasHabilitadas) { 
+							            // Pular ADMIN e GERENTE
+							            if (pessoa.getRole().equals(TipoUsuario.ADMIN) || pessoa.getRole().equals(TipoUsuario.GERENTE)) continue;
+							    %>
+							
+							    <tr>
+							        <td>
+							            <span class="badge bg-primary">#<%=pessoa.getId()%></span>
+							        </td>
+							        <td><strong><%=pessoa.getCpf()%></strong></td>
+							
+							        <td>
+							            <div class="user-info">
+							                <div class="user-avatar">
+							                    <%= pessoa.getNome().substring(0, 1).toUpperCase() %>
+							                </div>
+							                <span><%= pessoa.getNome() %></span>
+							            </div>
+							        </td>
+							
+							        <td><%= pessoa.getEmail() %></td>
+							
+							        <td class="text-end">
+							            <form action="<%=request.getContextPath()%>/pessoa/desabilitarContas" method="post" style="display:inline;">
+							                <input type="hidden" name="idContaParaSerDesabilitada" value="<%= pessoa.getId() %>">
+							
+							                <button 
+							                    type="submit" 
+							                    class="btn btn-danger btn-sm" 
+							                    onclick="return confirm('Tem certeza que deseja desabilitar a conta de <%=pessoa.getNome()%>?');">
+							                    <i class="bi bi-slash-circle me-1"></i>
+							                    Desabilitar
+							                </button>
+							            </form>
+							        </td>
+							    </tr>
+							
+							    <% } %>
 							</tbody>
+
 						</table>
 					</div>
 				</div>

@@ -16,7 +16,7 @@ class ConnectionFactory {
 	
 	public static Connection getConnection() throws SQLException {
 		Connection conn = DriverManager
-				.getConnection("jdbc:mysql://localhost:3306/bank", "root", "root");
+				.getConnection("jdbc:mysql://localhost:3307/bank", "root", "root");
 
 		return conn;
 	}
