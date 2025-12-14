@@ -43,10 +43,7 @@ public class HistoricoPessoaCommand implements Command {
 
         for (Transferencia tr : transferencias) {
 
-            if (tr.getId_usuarioQueTransferiu() == tr.getId_usuarioQueRecebeu()) {
-                continue;
-            }
-
+            
             Pessoa rem = pdao.findById(tr.getId_usuarioQueTransferiu());
             Pessoa dest = pdao.findById(tr.getId_usuarioQueRecebeu());
 

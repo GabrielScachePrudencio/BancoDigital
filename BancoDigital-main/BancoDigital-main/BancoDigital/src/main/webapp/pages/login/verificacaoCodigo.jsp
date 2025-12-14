@@ -197,13 +197,19 @@ body {
 			</div>
 
 			<%
-			String errorMsg = (String) request.getAttribute("error");
-			if (errorMsg != null) {
+			Boolean error = (Boolean) request.getAttribute("error");
+			String errorMsg = (String) request.getAttribute("errorMsg");
+			
+			if (error != null && error) {
 			%>
+
 			<div class="alert alert-danger alert-dismissible fade show" role="alert">
 				<i class="bi bi-exclamation-triangle-fill me-2"></i>
-				<strong>Erro:</strong> <%=errorMsg.equals("invalid") ? "Código inválido. Verifique seu email e tente novamente." : errorMsg %>
-				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				<strong>Erro:</strong>
+				<%= "invalid".equals(errorMsg)
+					? "Código inválido. Verifique seu email e tente novamente."
+					: errorMsg %>
+				<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
 			</div>
 			<%
 			}

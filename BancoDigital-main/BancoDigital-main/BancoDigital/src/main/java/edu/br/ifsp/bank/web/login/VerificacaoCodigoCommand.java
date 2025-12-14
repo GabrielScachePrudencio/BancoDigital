@@ -35,7 +35,9 @@ public class VerificacaoCodigoCommand implements Command{
 		    request.getRequestDispatcher("/pages/home/home.jsp").forward(request, response);
 		    return;
 		} else {
-		    request.setAttribute("error", true);
+			request.setAttribute("error", true);
+			request.setAttribute("errorMsg", "invalid");
+
 		    request.getRequestDispatcher("/pages/login/verificacaoCodigo.jsp").forward(request, response);
 		    return;
 		}

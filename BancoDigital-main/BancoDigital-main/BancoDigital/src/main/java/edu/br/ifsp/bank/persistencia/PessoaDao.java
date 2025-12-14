@@ -356,9 +356,15 @@ public class PessoaDao {
     public boolean validaCodigo(Integer codigoDigitado) {
         GeradorCodigos g = GeradorCodigos.getInstance();
         Integer codigoReal = g.getCodigoInt();
-        g.criaCodigo();
-        return codigoReal.equals(codigoDigitado);
+
+        if (codigoReal.equals(codigoDigitado)) {
+            g.criaCodigo(); 
+            return true;
+        }
+
+        return false;
     }
+
 
     public void habilitarConta(int id) {
         try {

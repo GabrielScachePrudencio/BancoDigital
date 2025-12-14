@@ -5,7 +5,8 @@ import com.itextpdf.text.Paragraph;
 
 public class GeradorPdf {
 
-    public void gerarPdfBoleto(Document pdf, Transferencia t, Pessoa pagador, Pessoa recebedor) throws Exception {
+	//transferencias
+    public void gerarPdfBoletoTransf(Document pdf, Transferencia t, Pessoa pagador, Pessoa recebedor) throws Exception {
 
         pdf.add(new Paragraph("COMPROVANTE DE TRANSFERÊNCIA"));
         pdf.add(new Paragraph("==========================================\n"));
@@ -26,17 +27,18 @@ public class GeradorPdf {
     }
     
     
-    public void gerarPdfRetirada(Document pdf, Transferencia retirada, Pessoa usuario) throws Exception {
+    //deposito ou retirar
+    public void gerarPdfDepRet(Document pdf, Transferencia transferencia, Pessoa usuario, String tipo) throws Exception {
 
-        pdf.add(new Paragraph("COMPROVANTE DE RETIRADA"));
+        pdf.add(new Paragraph("COMPROVANTE DE " + tipo));
         pdf.add(new Paragraph(" "));
         pdf.add(new Paragraph("Nome: " + usuario.getNome()));
         pdf.add(new Paragraph("CPF: " + usuario.getCpf()));
-        pdf.add(new Paragraph("Valor retirado: R$ " + String.format("%.2f", retirada.getValor())));
-        pdf.add(new Paragraph("Data/Hora: " + retirada.getHorario()));
+        pdf.add(new Paragraph("Valor retirado: R$ " + String.format("%.2f", transferencia.getValor())));
+        pdf.add(new Paragraph("Data/Hora: " + transferencia.getHorario()));
         pdf.add(new Paragraph(" "));
         pdf.add(new Paragraph("Operação realizada com sucesso."));
     }
 
-
+   
 }

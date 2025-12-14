@@ -13,26 +13,6 @@ function validadorBusca() {
 // ===== FORM HANDLING =====
 const forms = document.querySelectorAll('form');
 
-forms.forEach(form => {
-	form.addEventListener('submit', function(e) {
-		const submitBtn = this.querySelector('button[type="submit"]');
-		
-		if (submitBtn) {
-			// Add loading state
-			submitBtn.disabled = true;
-			const originalText = submitBtn.innerHTML;
-			submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Processando...';
-			
-			// Restore if validation fails
-			setTimeout(() => {
-				if (!this.checkValidity()) {
-					submitBtn.disabled = false;
-					submitBtn.innerHTML = originalText;
-				}
-			}, 100);
-		}
-	});
-});
 
 // ===== MONEY INPUT FORMATTING =====
 const valorInput = document.getElementById('valor');

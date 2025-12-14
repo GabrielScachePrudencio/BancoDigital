@@ -46,7 +46,6 @@ public class PessoaController extends HttpServlet{
 	        case "/todosTransferencias" -> new TodosTransferenciasCommand();
 
 	        
-	        
 	        //no home
 	        case "/depositar" -> (req, res) -> {
 	            req.getRequestDispatcher("/pages/business/depositar.jsp")
@@ -72,16 +71,15 @@ public class PessoaController extends HttpServlet{
 	        
 	        case "/resgatar" -> new ResgatarInvestimentoCommand();
 	      
-	        //permite acessar de fato a pagina apartir do email
 	        case "/trocarsenha" -> new TrocarSenhaCommand();
 	        
 	        
-	        //so enviar o email de troca de senha
 	        case "/enviarEmail" -> new EnviarEmailCommand();
 	        
 	        case "/habilitarContas" -> new HabilitarContasCommand();
 	        case "/desabilitarContas" -> new DesabilitarContasCommand();
 
+	        case "/pdf"-> new GerarPdfCommand();
 	        default -> PageNotFound.getInstance();
 	    };
 
@@ -104,7 +102,7 @@ public class PessoaController extends HttpServlet{
 	        case "/depositar" -> new DepositarPessoaCommand();
 	        case "/retirar" -> new RetirarPessoaCommand();
 	        case "/transferir" -> new TransferirPessoaCommand();
-	        
+
 	        case "/emprestimoSac" -> new SimularEmprestimoSacCommand();
 	        case "/investir" -> new InvestirPessoaCommand();
 	        case "/resgatar" -> new ResgatarInvestimentoCommand();
@@ -120,6 +118,7 @@ public class PessoaController extends HttpServlet{
 	        case "/habilitarContas" -> new HabilitarContasCommand();
 	        case "/desabilitarContas" -> new DesabilitarContasCommand();
 
+	        case "/pdf"-> new GerarPdfCommand();
 	        default -> PageNotFound.getInstance();
 	    };
 

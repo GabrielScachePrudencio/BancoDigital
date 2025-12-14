@@ -91,27 +91,18 @@ public class RetirarPessoaCommand implements Command {
         try {
             float valor = Float.parseFloat(valorStr);
 
-            // --- REALIZA A RETIRADA ---
             Transferencia retirada = tdao.retirar(logado.getCpf(), valor);
 
-            // Atualiza saldo na sessão
             Pessoa atualizado = pdao.findByCPF(logado.getCpf());
             session.setAttribute("usuarioLogado", atualizado);
-
-            // ------- GERAR PDF DA RETIRADA -------
-            response.setContentType("application/pdf");
-            response.setHeader("Content-Disposition",
-                "attachment; filename=retirada_" + logado.getNome() + ".pdf");
-
-            Document pdf = new Document();
-            PdfWriter.getInstance(pdf, response.getOutputStream());
-            pdf.open();
-
-            GeradorPdf gerador = new GeradorPdf();
-            gerador.gerarPdfRetirada(pdf, retirada, logado);
-
-            pdf.close();
-            return;
+            
+            session.setAttribute("ultimaTransferencia", retirada);
+	         session.setAttribute("tipoPdf", "deposito");
+            
+	         request.setAttribute("sucesso", true);
+	         request.getRequestDispatcher("/pages/business/depositar.jsp")
+	                .forward(request, response);
+	         return;
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,13 +1,7 @@
 package edu.br.ifsp.bank.web.pessoa;
 
-
-
 import java.io.IOException;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.pdf.PdfWriter;
-
-import edu.br.ifsp.bank.modelo.GeradorPdf;
 import edu.br.ifsp.bank.modelo.Pessoa;
 import edu.br.ifsp.bank.modelo.Transferencia;
 import edu.br.ifsp.bank.persistencia.PessoaDao;
@@ -40,27 +34,17 @@ public class DepositarPessoaCommand implements Command {
         try {
             float valor = Float.parseFloat(valorStr);
 
-            // ----- REALIZA O DEPÓSITO NO BANCO -----
             Transferencia deposito = tdao.depositar(cpf, valor);
 
-            // Atualiza saldo na sessão
             Pessoa atualizado = pdao.findByCPF(cpf);
-            session.setAttribute("usuarioLogado", atualizado);
-
-            // -------- GERAR PDF DO DEPÓSITO ----------
-            response.setContentType("application/pdf");
-            response.setHeader("Content-Disposition",
-                    "attachment; filename=deposito_" + atualizado.getNome() + ".pdf");
-
-            Document pdf = new Document();
-            PdfWriter.getInstance(pdf, response.getOutputStream());
-            pdf.open();
-
-            GeradorPdf gerador = new GeradorPdf();
-            gerador.gerarPdfBoleto(pdf, deposito, atualizado, atualizado); // mesma pessoa
-
-            pdf.close();
-            return;
+	        session.setAttribute("usuarioLogado", atualizado);
+	         session.setAttribute("ultimaTransferencia", deposito);
+	         session.setAttribute("tipoPdf", "deposito");
+	
+	         request.setAttribute("sucesso", true);
+	         request.getRequestDispatcher("/pages/business/depositar.jsp")
+	                .forward(request, response);
+	         return;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -69,4 +53,3 @@ public class DepositarPessoaCommand implements Command {
         }
     }
 }
-
